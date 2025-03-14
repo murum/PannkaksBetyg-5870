@@ -1,7 +1,35 @@
-// ... tidigare imports ...
+import React, { useState } from 'react';
+import { motion } from 'framer-motion';
+import { FaStar } from 'react-icons/fa';
+
+const criteria = {
+  taste: 'Smak',
+  texture: 'Konsistens',
+  presentation: 'Presentation',
+  service: 'Service',
+  atmosphere: 'Atmosfär'
+};
 
 const RatingForm = ({ restaurant, onSubmit, onClose }) => {
-  // ... tidigare state och funktioner ...
+  const [ratings, setRatings] = useState({
+    taste: 0,
+    texture: 0,
+    presentation: 0,
+    service: 0,
+    atmosphere: 0
+  });
+
+  const handleRatingChange = (criterion, value) => {
+    setRatings(prev => ({
+      ...prev,
+      [criterion]: value
+    }));
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    onSubmit(ratings);
+  };
 
   return (
     <motion.div
